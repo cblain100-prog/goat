@@ -38,6 +38,16 @@ The founder is French. Everything the founder reads is in French, with tutoiemen
 - **Named seats** (`--jures a,b`): only those seats, same rounds as the default.
 - **Consult** (`demande <juré> ...`): one seat, one answer, using the single-seat prompt. No scoring, no session folder.
 
+## Step 0: Open the room (council modes, not a single-seat consult)
+
+Before anything else, start the room if it is not running and open it in the founder's browser, so they watch the council live from the first file:
+
+```bash
+curl -s -o /dev/null -H "Host: localhost:4730" http://localhost:4730/api/seats || (cd "$GOAT" && nohup node app/server.mjs > /dev/null 2>&1 &); sleep 1; open "http://localhost:4730" 2>/dev/null || xdg-open "http://localhost:4730" 2>/dev/null || true
+```
+
+If Node is missing, say so in one line (the council still runs, and `rapport.html` still shows who said what at the end) and carry on.
+
 ## Step 1: The founder's context, then the brief
 
 1. **Read the founder's context before asking anything.** Look for `$GOAT/mon-business.md`. It holds the founder's facts, or the paths of the files of their second brain that hold them (offer, prices, revenue, clients, team, cash, current priorities). Read every file it lists, and only those. If there is none, read the `CLAUDE.md`, `AGENTS.md`, or `business.md` of the folder the founder launched you from, if they hold business facts. Never ask the founder for a number that is written there.
@@ -55,7 +65,7 @@ Keep the brief under 300 words. Mark every assumption `(hypothèse)` and every f
 
 - Set a relevance weight per seat (1 to 3) with a one-line reason, per `seats.md`.
 - Create the session folder: `$GOAT/sessions/YYYY-MM-DD-<decision-slug>/`. Save `brief.md` (the brief, the options, and the weights table) and `council.json` (`live-room.md`).
-- Tell the founder once: « Suis le conseil en direct sur http://localhost:4730 » (the room is optional; if it is not running, `cd "$GOAT" && npm start` launches it).
+- Tell the founder once: « Le conseil s'affiche en direct sur http://localhost:4730 » (opened in Step 0).
 
 ## Step 3: Round 1, opening positions
 

@@ -18,20 +18,23 @@ Tu apportes une décision business. Quatre conseillers IA la débattent, puis te
 
 ## Installation
 
+Le plus simple : ouvre Claude Code n'importe où et colle cette phrase.
+
+```
+Clone https://github.com/cblain100-prog/goat dans mon dossier Apps, puis lance bash scripts/install.sh dedans.
+```
+
+Claude récupère le dépôt et lance l'installation. `/goat` devient alors disponible dans **tous** tes dossiers (ton second cerveau, tes autres projets). Redémarre Claude Code, c'est prêt.
+
+À la main, c'est pareil :
+
 ```bash
 git clone https://github.com/cblain100-prog/goat.git
 cd goat
-```
-
-Ou ouvre Claude Code n'importe où et dis : « Clone github.com/cblain100-prog/goat et lance la salle. »
-
-Pour avoir `/goat` dans **tous** tes dossiers (ton second cerveau, tes autres projets), et pas seulement dans celui-ci :
-
-```bash
 bash scripts/install.sh
 ```
 
-Ça crée des liens vers le skill dans `~/.claude/skills/goat` et vers les quatre jurés dans `~/.claude/agents/`. Un `git pull` les met à jour. Redémarre Claude Code après l'installation. Pour les retirer : `bash scripts/install.sh --remove`.
+L'installation crée des liens vers le skill dans `~/.claude/skills/goat` et vers les quatre jurés dans `~/.claude/agents/`. Un `git pull` les met à jour. Pour les retirer : `bash scripts/install.sh --remove`. Sans installation, `/goat` marche seulement quand tu ouvres Claude Code dans le dossier `goat`.
 
 ## Branche ton second cerveau (recommandé)
 
@@ -39,11 +42,10 @@ Le conseil est aussi bon que ce qu'il sait de ta boîte. Copie `mon-business.exe
 
 ## Lancer un conseil
 
-1. Lance la salle : `npm start`, puis ouvre http://localhost:4730. Laisse-la ouverte.
-2. Ouvre Claude Code dans le même dossier : `claude`
-3. Tape `/goat` suivi de ta décision.
-4. Réponds aux questions du président s'il lui manque quelque chose, puis regarde le conseil débattre dans la salle.
-5. Quand le verdict tombe, clique sur **Télécharger le PDF**.
+1. Ouvre Claude Code dans n'importe quel dossier et tape `/goat` suivi de ta décision.
+2. La salle s'ouvre toute seule dans ton navigateur (http://localhost:4730) et montre le conseil en direct.
+3. Réponds aux questions du président s'il lui manque quelque chose, puis regarde le conseil débattre.
+4. Quand le verdict tombe, clique sur **Télécharger le PDF**, ou ouvre `rapport.html` pour voir qui a dit quoi.
 
 Tu as aussi un verdict court dans Claude Code, et deux fichiers dans `sessions/<date>-<décision>/` :
 
