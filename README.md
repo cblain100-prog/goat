@@ -25,6 +25,14 @@ cd goat
 
 Ou ouvre Claude Code n'importe où et dis : « Clone github.com/cblain100-prog/goat et lance la salle. »
 
+Pour avoir `/goat` dans **tous** tes dossiers (ton second cerveau, tes autres projets), et pas seulement dans celui-ci :
+
+```bash
+bash scripts/install.sh
+```
+
+Ça crée des liens vers le skill dans `~/.claude/skills/goat` et vers les quatre jurés dans `~/.claude/agents/`. Un `git pull` les met à jour. Redémarre Claude Code après l'installation. Pour les retirer : `bash scripts/install.sh --remove`.
+
 ## Branche ton second cerveau (recommandé)
 
 Le conseil est aussi bon que ce qu'il sait de ta boîte. Copie `mon-business.exemple.md` en `mon-business.md` et remplis-le : soit tes chiffres directement, soit les chemins des fichiers de ton second cerveau qui les contiennent (offre, prix, clients, chiffre d'affaires). Le président les lit avant chaque conseil : tu n'as plus rien à réexpliquer. Ce fichier reste sur ta machine, il n'est jamais envoyé sur GitHub.

@@ -10,6 +10,16 @@ The GOAT council runs a board meeting on one decision. Four seats, one per busin
 
 Read once before the first run: `references/seats.md` (roster, weights, tensions), `references/round-prompts.md` (what each seat gets), `references/scoring.md` (math and overrides), `references/report-template.md` (output), `references/live-room.md` (the small JSON files the visual room plays).
 
+## Where GOAT lives (do this first)
+
+GOAT can be launched from any folder (the founder's second brain, another project). Find the GOAT root once, before anything else:
+
+```bash
+GOAT="$(python3 -c 'import os; p=os.path.realpath(os.path.expanduser("~/.claude/skills/goat")); print(os.path.dirname(os.path.dirname(os.path.dirname(p))) if os.path.isdir(p) else os.getcwd())')"; echo "$GOAT"
+```
+
+Every path below is relative to `$GOAT` (the folder that holds `app/`, `sessions/` and `.claude/skills/goat/`), never to the current folder: write sessions in `$GOAT/sessions/`, read `$GOAT/mon-business.md`, run the scripts from `$GOAT`. Give `$GOAT` as the absolute repo root at the top of every seat prompt. The skill's own references are in `$GOAT/.claude/skills/goat/references/`.
+
 ## Language
 
 The founder is French. Everything the founder reads is in French, with tutoiement: your questions, the brief, the Chair notes, the verdict in chat, `verdict.md`. Plain, short sentences, no em dashes, no filler. Machine fields stay as specified (card labels, JSON keys, verdict labels in JSON); in prose, translate the verdict label: ON Y VA, OUI SOUS CONDITIONS, À RETRAVAILLER, PAS MAINTENANT, NE LE FAIS PAS.
@@ -30,7 +40,7 @@ The founder is French. Everything the founder reads is in French, with tutoiemen
 
 ## Step 1: The founder's context, then the brief
 
-1. **Read the founder's context before asking anything.** Look for `mon-business.md` at the project root. It holds the founder's facts, or the paths of the files of their second brain that hold them (offer, prices, revenue, clients, team, cash, current priorities). Read every file it lists, and only those. If there is no `mon-business.md`, read the project's `CLAUDE.md`, `AGENTS.md`, or `business.md` if they hold business facts. Never ask the founder for a number that is written there.
+1. **Read the founder's context before asking anything.** Look for `$GOAT/mon-business.md`. It holds the founder's facts, or the paths of the files of their second brain that hold them (offer, prices, revenue, clients, team, cash, current priorities). Read every file it lists, and only those. If there is none, read the `CLAUDE.md`, `AGENTS.md`, or `business.md` of the folder the founder launched you from, if they hold business facts. Never ask the founder for a number that is written there.
 2. **Build the brief** from that context and the request:
    1. **The decision** in one line, and the options as A, B, C. Always include "ne rien changer" (or "ne pas le faire") and any alternative the founder mentioned. If the founder brought one idea, add the obvious smaller version as an option.
    2. **The business**: what it sells, to whom, stage, monthly revenue, margin if known, team size.
@@ -44,8 +54,8 @@ Keep the brief under 300 words. Mark every assumption `(hypothèse)` and every f
 ## Step 2: Set up the room
 
 - Set a relevance weight per seat (1 to 3) with a one-line reason, per `seats.md`.
-- Create the session folder: `sessions/YYYY-MM-DD-<decision-slug>/` at the project root. Save `brief.md` (the brief, the options, and the weights table) and `council.json` (`live-room.md`).
-- Tell the founder once: « Suis le conseil en direct sur http://localhost:4730 » (the room is optional; if it is not running, `npm start` launches it).
+- Create the session folder: `$GOAT/sessions/YYYY-MM-DD-<decision-slug>/`. Save `brief.md` (the brief, the options, and the weights table) and `council.json` (`live-room.md`).
+- Tell the founder once: « Suis le conseil en direct sur http://localhost:4730 » (the room is optional; if it is not running, `cd "$GOAT" && npm start` launches it).
 
 ## Step 3: Round 1, opening positions
 
@@ -75,8 +85,8 @@ When it runs: spawn every seat with the Round 3 prompt, save to `round-3.md`, an
 
 ## Step 7: Verify, then verdict
 
-1. Run `python3 .claude/skills/goat/scripts/check_quotes.py <session folder>` (try `python` if `python3` is missing). Every quote attributed to a source id must be in a brain. Remove any unverified quote from the verdict and say so in the Chair notes. If Python is not installed, check each attributed quote yourself by searching that seat's brain folder for the exact words.
-2. Compute the numbers from the last round's cards per `scoring.md` (when Round 3 was skipped, use Round 2 and report no resolution support), apply the overrides, and write `verdict.md` from `report-template.md`. Write `verdict.json` last (`live-room.md`); it tells the room the council is over. Then run `node app/scripts/rapport.mjs <session folder>`: it writes `rapport.html` in the session folder, a single page that shows who said what, who contradicted whom, who moved, and the verdict, and opens without the room.
+1. Run `python3 "$GOAT/.claude/skills/goat/scripts/check_quotes.py" <session folder>` (try `python` if `python3` is missing). Every quote attributed to a source id must be in a brain. Remove any unverified quote from the verdict and say so in the Chair notes. If Python is not installed, check each attributed quote yourself by searching that seat's brain folder for the exact words.
+2. Compute the numbers from the last round's cards per `scoring.md` (when Round 3 was skipped, use Round 2 and report no resolution support), apply the overrides, and write `verdict.md` from `report-template.md`. Write `verdict.json` last (`live-room.md`); it tells the room the council is over. Then run `node "$GOAT/app/scripts/rapport.mjs" <session folder>`: it writes `rapport.html` in the session folder, a single page that shows who said what, who contradicted whom, who moved, and the verdict, and opens without the room.
 3. Show the founder a short verdict in chat, in French, not the full report: the label and the call, the option scores on one line, the three arguments that carried the room (one line each, with the seat), the strongest objection (one line, with the seat), and the next steps (at most three). Then the path to `rapport.html` (« qui a dit quoi », to open in the browser), the path to `verdict.md`, one line saying the PDF is one click away (« Télécharger le PDF » on http://localhost:4730), the number of seat runs used, and one line offering a follow-up with one seat or a rerun with new facts. Under 200 words.
 
 ## Chair rules
@@ -88,12 +98,12 @@ When it runs: spawn every seat with the Round 3 prompt, save to `round-3.md`, an
 
 ## Without sub-agents (a runtime that cannot spawn agents)
 
-Run the same protocol sequentially yourself. For each seat, read `.claude/agents/goat-<seat>.md` and its brain, write that seat's card, then clear your head before the next seat: do not let one seat's card shape the next one's in Round 1.
+Run the same protocol sequentially yourself. For each seat, read `$GOAT/.claude/agents/goat-<seat>.md` and its brain, write that seat's card, then clear your head before the next seat: do not let one seat's card shape the next one's in Round 1.
 
 ## Files
 
 - `brains/<slug>/`: one brain per seat (`_hot.md`, `frameworks.md`, `principles.md`, `positions.md`, `voice.md`, `stories.md`, `books.md`, `sources.md`).
 - `scripts/check_quotes.py`: verifies every attributed quote in a session against the brains.
-- Agents: `.claude/agents/goat-{bezos,hormozi,garyvee,buffett}.md`.
+- Agents: `$GOAT/.claude/agents/goat-{bezos,hormozi,garyvee,buffett}.md`, installed for every folder by `$GOAT/scripts/install.sh` (links in `~/.claude/agents/`).
 - The room: `app/` (see the project `README.md`).
-- `mon-business.md` at the project root (personal, never committed): the founder's facts or the paths to their second brain.
+- `$GOAT/mon-business.md` (personal, never committed): the founder's facts or the paths to their second brain.
