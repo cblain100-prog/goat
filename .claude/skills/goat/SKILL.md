@@ -65,7 +65,7 @@ Spawn every seat again, in one message, with the Round 2 prompt (it points them 
 
 ## Step 5: Draft resolution
 
-Write `draft-resolution.md`: the recommendation (named option and verdict label), the conditions the seats asked for (merge duplicates, keep them checkable, pick one number when seats differ and say whose), the next steps with dates, the cheapest test, and kill criteria. Weigh arguments, not headcount: one seat with a decisive fact beats three seats with vibes. Apply the overrides. Also write `draft.json` (`live-room.md`).
+Write `draft-resolution.md`: the recommendation (named option and verdict label), the conditions the seats asked for (merge duplicates, keep them checkable, pick one number when seats differ and say whose), the next steps with dates, the cheapest test, and kill criteria. Weigh arguments, not headcount: one seat with a decisive fact beats three seats with vibes. Apply the overrides. Write `draft.json` (`live-room.md`) only if Round 3 will run (Step 6); when the room already converged, go straight to the verdict.
 
 ## Step 6: Round 3, only if the room is still split
 
@@ -76,8 +76,8 @@ When it runs: spawn every seat with the Round 3 prompt, save to `round-3.md`, an
 ## Step 7: Verify, then verdict
 
 1. Run `python3 .claude/skills/goat/scripts/check_quotes.py <session folder>` (try `python` if `python3` is missing). Every quote attributed to a source id must be in a brain. Remove any unverified quote from the verdict and say so in the Chair notes. If Python is not installed, check each attributed quote yourself by searching that seat's brain folder for the exact words.
-2. Compute the numbers from the last round's cards per `scoring.md` (when Round 3 was skipped, use Round 2 and report no resolution support), apply the overrides, and write `verdict.md` from `report-template.md`. Write `verdict.json` last (`live-room.md`); it tells the room the council is over.
-3. Show the founder a short verdict in chat, in French, not the full report: the label and the call, the option scores on one line, the three arguments that carried the room (one line each, with the seat), the strongest objection (one line, with the seat), and the next steps (at most three). Then the path to `verdict.md`, one line saying the PDF is one click away (« Télécharger le PDF » on http://localhost:4730), the number of seat runs used, and one line offering a follow-up with one seat or a rerun with new facts. Under 200 words.
+2. Compute the numbers from the last round's cards per `scoring.md` (when Round 3 was skipped, use Round 2 and report no resolution support), apply the overrides, and write `verdict.md` from `report-template.md`. Write `verdict.json` last (`live-room.md`); it tells the room the council is over. Then run `node app/scripts/rapport.mjs <session folder>`: it writes `rapport.html` in the session folder, a single page that shows who said what, who contradicted whom, who moved, and the verdict, and opens without the room.
+3. Show the founder a short verdict in chat, in French, not the full report: the label and the call, the option scores on one line, the three arguments that carried the room (one line each, with the seat), the strongest objection (one line, with the seat), and the next steps (at most three). Then the path to `rapport.html` (« qui a dit quoi », to open in the browser), the path to `verdict.md`, one line saying the PDF is one click away (« Télécharger le PDF » on http://localhost:4730), the number of seat runs used, and one line offering a follow-up with one seat or a rerun with new facts. Under 200 words.
 
 ## Chair rules
 

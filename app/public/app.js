@@ -67,7 +67,7 @@ const PHASE_TEXT = {
   round2: ["Tour 2 : le débat"],
   draft: ["Le président prépare la proposition", "Je transforme le débat en proposition"],
   round3: ["Tour 3 : le vote"],
-  skip3: ["Mode rapide : pas de tour de vote", "Mode rapide : les avis convergent, on saute le vote"],
+  skip3: ["Accord en deux tours : pas de tour de vote", "Les avis convergent, on saute le vote"],
   verdict: ["Le président rédige le verdict", "J'écris le verdict"],
 };
 const ROUND_LINE = ["", "Tour 1 : positions d'ouverture", "Tour 2 : le débat", "Tour 3 : le vote"];

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node app/server.mjs",
-    "smoke": "node app/scripts/smoke.mjs"
+    "smoke": "node app/scripts/smoke.mjs",
+    "rapport": "node app/scripts/rapport.mjs"
   },
   "engines": {
     "node": ">=20"

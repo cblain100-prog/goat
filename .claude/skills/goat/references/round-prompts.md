@@ -29,7 +29,7 @@ Answer in your seat's voice, plain text, under 300 words, in exactly this shape:
 
 SEAT: [SEAT] ([pillar])
 STANCE: Strong yes | Yes | Conditional yes | No | Strong no   (on the option you recommend)
-OPTION SCORES: [A] n/10 · [B] n/10 · [C] n/10   (how strongly you back each option)
+OPTION SCORES: A n/10 · B n/10 · C n/10   (no brackets)   (how strongly you back each option)
 PILLAR SCORE: n/10   ([dimension]: the option you recommend, judged on your pillar alone)
 CONFIDENCE: n/5
 RUIN RISK: none | possible | likely   (an irreversible downside that could sink the company or the founder, for the option you recommend)
@@ -70,7 +70,7 @@ I DISAGREE MOST WITH: [seat]. Their argument, in one line, then your rebuttal us
 I CONCEDE: the strongest point another seat made against you, and what it changes. "Nothing" only if you can say why their best point fails.
 ON THE CRUXES: your answer to each crux, one or two lines each.
 STANCE: ...
-OPTION SCORES: [A] n/10 · [B] n/10 · [C] n/10
+OPTION SCORES: A n/10 · B n/10 · C n/10   (no brackets)
 PILLAR SCORE: n/10
 CONFIDENCE: n/5
 RUIN RISK: none | possible | likely
@@ -95,7 +95,7 @@ Answer in your seat's voice, under 120 words, in exactly this shape:
 
 SEAT: [SEAT]
 VOTE: Endorse | Endorse with amendment | Dissent
-OPTION SCORES: [A] n/10 · [B] n/10 · [C] n/10   (given the resolution's conditions)
+OPTION SCORES: A n/10 · B n/10 · C n/10   (no brackets)   (given the resolution's conditions)
 FINAL SCORE: n/10   (your support for the draft resolution as written)
 FINAL PILLAR SCORE: n/10
 AMENDMENT OR DISSENT: one or two sentences (what to change, or why you dissent). Blank if you endorse.

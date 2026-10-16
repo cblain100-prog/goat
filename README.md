@@ -37,7 +37,10 @@ Le conseil est aussi bon que ce qu'il sait de ta boîte. Copie `mon-business.exe
 4. Réponds aux questions du président s'il lui manque quelque chose, puis regarde le conseil débattre dans la salle.
 5. Quand le verdict tombe, clique sur **Télécharger le PDF**.
 
-Tu as aussi un verdict court dans Claude Code, et le rapport complet arrive dans `sessions/<date>-<décision>/verdict.md`.
+Tu as aussi un verdict court dans Claude Code, et deux fichiers dans `sessions/<date>-<décision>/` :
+
+- `rapport.html` : une page à ouvrir dans ton navigateur, sans serveur, qui montre qui a dit quoi, qui a contredit qui, qui a changé d'avis, et le verdict. Pour la refaire à la main : `npm run rapport -- sessions/<date>-<décision>`.
+- `verdict.md` : le rapport écrit du président.
 
 ## Ce qu'il faut mettre dans ta question
 
